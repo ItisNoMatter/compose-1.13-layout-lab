@@ -11,8 +11,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.rows
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
@@ -51,6 +54,7 @@ fun GridLab(modifier: Modifier = Modifier) {
         GridSpanCard()
         GridFlowCard()
         GridNamedAreaCard()
+        GridWithScrollAreaCard()
         Spacer(Modifier.height(24.dp))
     }
 }
@@ -372,7 +376,87 @@ private fun GridNamedAreaCard() {
         }
         Hint(
             "1.fr のトラックは子の intrinsic サイズを問い合わせる。" +
-                "LazyColumn のような SubcomposeLayout を直接置くときは minmax(0.dp, 1.fr) を使うこと。"
+                "LazyColumn のような SubcomposeLayout を置くセルでは、行も列も " +
+                "minmax / Fixed / Percentage のどれかにすること (次のデモ参照)。"
+        )
+    }
+}
+
+// ---------------------------------------------------------------------------
+// 5. Grid の中にスクロール領域を置く
+// ---------------------------------------------------------------------------
+
+private val scrollRows = List(30) { "#%05d  サンプル取引先 %02d".format(10231 + it, it + 1) }
+
+@Composable
+private fun GridWithScrollAreaCard() {
+    DemoCard(
+        title = "5. Grid の中にスクロール領域を置く",
+        description = "LazyColumn のような SubcomposeLayout は intrinsic 計測に対応していないため、" +
+            "それを問い合わせるトラックに置くとクラッシュする。" +
+            "セルが乗っている行と列の両方を、intrinsic を見ないトラックにするのが正解。",
+        code = """
+            Grid(
+                config = {
+                    // 行・列の「両方」を intrinsic を問い合わせないトラックにする
+                    column(96.dp)                 // Fixed: OK
+                    column(minmax(0.dp, 1.fr))    // MinMax: OK (1.fr はNG)
+                    row(40.dp)                    // Fixed: OK
+                    row(minmax(0.dp, 1.fr))       // MinMax: OK (Auto も 1.fr もNG)
+                    gap(8.dp)
+                },
+                modifier = Modifier.fillMaxWidth().height(280.dp),
+            ) {
+                Header(Modifier.gridItem(row = 1, column = 1, columnSpan = 2))
+                Nav(Modifier.gridItem(row = 2, column = 1))
+                LazyColumn(Modifier.gridItem(row = 2, column = 2).fillMaxSize()) {
+                    items(rows) { Text(it) }
+                }
+            }
+        """.trimIndent(),
+    ) {
+        DemoStage {
+            Grid(
+                config = {
+                    column(96.dp)
+                    column(minmax(0.dp, 1.fr))
+                    row(40.dp)
+                    row(minmax(0.dp, 1.fr))
+                    gap(8.dp)
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(280.dp),
+            ) {
+                Swatch(
+                    "header",
+                    LabPalette.Indigo,
+                    Modifier.gridItem(row = 1, column = 1, columnSpan = 2).fillMaxSize(),
+                    12,
+                )
+                Swatch(
+                    "nav",
+                    LabPalette.Teal,
+                    Modifier.gridItem(row = 2, column = 1).fillMaxSize(),
+                    12,
+                )
+                LazyColumn(
+                    modifier = Modifier.gridItem(row = 2, column = 2).fillMaxSize(),
+                ) {
+                    items(scrollRows.size) { index ->
+                        Text(
+                            scrollRows[index],
+                            style = MaterialTheme.typography.bodySmall,
+                            modifier = Modifier.padding(vertical = 4.dp),
+                        )
+                    }
+                }
+            }
+        }
+        Hint(
+            "intrinsic を問い合わせる (= SubcomposeLayout を置けない) のは 1.fr / Auto / " +
+                "MinContent / MaxContent。宣言し忘れたときの暗黙トラックも Auto なので同じく NG。" +
+                "安全なのは Fixed / Percentage / minmax の 3 つ。"
         )
     }
 }

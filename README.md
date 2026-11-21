@@ -58,8 +58,10 @@ FlexBox(config = ToolbarBase then FlexBoxConfig { wrap(FlexWrap.Wrap) }) { /* ..
 
 ## ハマりどころ
 
-- `1.fr` のトラックは子の intrinsic サイズを問い合わせる。`LazyColumn` のような
-  `SubcomposeLayout` を直接置くとクラッシュするので、`minmax(0.dp, 1.fr)` を使う。
+- `LazyColumn` のような `SubcomposeLayout` を Grid のセルに置くときは、そのセルが乗る
+  **行と列の両方**を `Fixed` / `Percentage` / `minmax` のどれかにする。
+  `1.fr` / `Auto` / `MinContent` / `MaxContent`、および宣言し忘れた暗黙トラック (既定 `Auto`) は
+  intrinsic を問い合わせるのでクラッシュする。
 - `Modifier.gridItem(...)` の `alignment` の既定は `Alignment.TopStart`。
   セルいっぱいに広げたいときは `fillMaxSize()` を添える。
 - `alignContent` は折り返しが発生しているときだけ効く。
@@ -75,7 +77,7 @@ app/src/main/java/com/example/inomasandbox/
     ├── LayoutLabApp.kt        タブ付きのアプリシェル
     ├── LabCommon.kt           DemoCard / Swatch / ChoiceRow など共通部品
     ├── FlexBoxLab.kt          FlexBox のデモ 6 本
-    ├── GridLab.kt             Grid のデモ 4 本
+    ├── GridLab.kt             Grid のデモ 5 本
     └── ResponsiveLab.kt       FlexBox + Grid の組み合わせ実例
 ```
 
