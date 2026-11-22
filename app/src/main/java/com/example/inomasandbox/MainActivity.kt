@@ -24,6 +24,12 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@Preview(showBackground = true, heightDp = 600)
+@Composable
+private fun LayoutLabAppPreview() {
+    INomaSandboxTheme { LayoutLabApp() }
+}
+
 @Preview(showBackground = true, heightDp = 1400)
 @Composable
 private fun FlexBoxLabPreview() {

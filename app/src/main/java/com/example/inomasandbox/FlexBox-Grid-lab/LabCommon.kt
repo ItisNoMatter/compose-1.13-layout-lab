@@ -24,6 +24,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -234,11 +235,11 @@ fun LabeledSlider(
                 fontFamily = FontFamily.Monospace,
             )
         }
+        val sliderState = remember(steps, valueRange) { SliderState(value, steps, valueRange) }
+        sliderState.value = value
         Slider(
-            value = value,
+            state = sliderState,
             onValueChange = onValueChange,
-            valueRange = valueRange,
-            steps = steps,
             modifier = Modifier.height(28.dp),
         )
     }
