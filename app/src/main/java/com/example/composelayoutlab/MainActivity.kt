@@ -1,4 +1,4 @@
-package com.example.inomasandbox
+package com.example.composelayoutlab
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -6,18 +6,18 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.inomasandbox.`FlexBox-Grid-lab`.FlexBoxLab
-import com.example.inomasandbox.`FlexBox-Grid-lab`.GridLab
-import com.example.inomasandbox.`FlexBox-Grid-lab`.LayoutLabApp
-import com.example.inomasandbox.`FlexBox-Grid-lab`.ResponsiveLab
-import com.example.inomasandbox.ui.theme.INomaSandboxTheme
+import com.example.composelayoutlab.flexgridlab.FlexBoxLab
+import com.example.composelayoutlab.flexgridlab.GridLab
+import com.example.composelayoutlab.flexgridlab.LayoutLabApp
+import com.example.composelayoutlab.flexgridlab.ResponsiveLab
+import com.example.composelayoutlab.ui.theme.ComposeLayoutLabTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            INomaSandboxTheme {
+            ComposeLayoutLabTheme {
                 LayoutLabApp()
             }
         }
@@ -27,29 +27,29 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true, heightDp = 600)
 @Composable
 private fun LayoutLabAppPreview() {
-    INomaSandboxTheme { LayoutLabApp() }
+    ComposeLayoutLabTheme { LayoutLabApp() }
 }
 
 @Preview(showBackground = true, heightDp = 1400)
 @Composable
 private fun FlexBoxLabPreview() {
-    INomaSandboxTheme { FlexBoxLab() }
+    ComposeLayoutLabTheme { FlexBoxLab() }
 }
 
 @Preview(showBackground = true, heightDp = 1400)
 @Composable
 private fun GridLabPreview() {
-    INomaSandboxTheme { GridLab() }
+    ComposeLayoutLabTheme { GridLab() }
 }
 
 @Preview(showBackground = true, heightDp = 1000)
 @Composable
 private fun ResponsiveLabPreview() {
-    INomaSandboxTheme { ResponsiveLab() }
+    ComposeLayoutLabTheme { ResponsiveLab() }
 }
 
 @Preview(showBackground = true, widthDp = 800, heightDp = 1000)
 @Composable
 private fun ResponsiveLabWidePreview() {
-    INomaSandboxTheme { ResponsiveLab() }
+    ComposeLayoutLabTheme { ResponsiveLab() }
 }

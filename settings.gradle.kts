@@ -22,5 +22,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "iNomaSandbox"
+rootProject.name = "compose-1.13-layout-lab"
 include(":app")

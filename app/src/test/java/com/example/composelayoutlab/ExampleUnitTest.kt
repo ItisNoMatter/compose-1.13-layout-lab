@@ -1,4 +1,4 @@
-package com.example.inomasandbox
+package com.example.composelayoutlab
 
 import org.junit.Test
 

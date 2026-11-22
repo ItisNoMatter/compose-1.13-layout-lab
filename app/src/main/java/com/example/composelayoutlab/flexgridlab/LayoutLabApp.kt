@@ -1,4 +1,4 @@
-package com.example.inomasandbox.`FlexBox-Grid-lab`
+package com.example.composelayoutlab.flexgridlab
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize

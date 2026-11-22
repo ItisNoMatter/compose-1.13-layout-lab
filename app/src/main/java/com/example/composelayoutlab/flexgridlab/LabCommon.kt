@@ -1,4 +1,4 @@
-package com.example.inomasandbox.`FlexBox-Grid-lab`
+package com.example.composelayoutlab.flexgridlab
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border

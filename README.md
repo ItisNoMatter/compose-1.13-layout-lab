@@ -1,4 +1,4 @@
-# iNomaSandbox — Compose 1.13 Layout Lab
+# compose-1.13-layout-lab — Compose 1.13 Layout Lab
 
 Compose 1.13 (Compose BOM `2026.11.01` / `androidx.compose.foundation:foundation:1.13.0`) で
 **stable になった `FlexBox` と `Grid`** を、実機で触りながら理解するためのサンドボックスアプリ。
@@ -71,9 +71,9 @@ FlexBox(config = ToolbarBase then FlexBoxConfig { wrap(FlexWrap.Wrap) }) { /* ..
 ## ソース構成
 
 ```
-app/src/main/java/com/example/inomasandbox/
+app/src/main/java/com/example/composelayoutlab/
 ├── MainActivity.kt            エントリポイント + 各ラボの @Preview
-└── FlexBox-Grid-lab/
+└── flexgridlab/
     ├── LayoutLabApp.kt        タブ付きのアプリシェル
     ├── LabCommon.kt           DemoCard / Swatch / ChoiceRow など共通部品
     ├── FlexBoxLab.kt          FlexBox のデモ 6 本

@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.inomasandbox"
+    namespace = "com.example.composelayoutlab"
     compileSdk {
         // Compose 1.13 (FlexBox / Grid) は minor API level 37.1 でのコンパイルを要求する
         version = release(37) {
@@ -13,7 +13,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.inomasandbox"
+        applicationId = "com.example.composelayoutlab"
         minSdk = 24
         targetSdk = 37
         versionCode = 1

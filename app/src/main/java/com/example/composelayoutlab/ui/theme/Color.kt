@@ -1,4 +1,4 @@
-package com.example.inomasandbox.ui.theme
+package com.example.composelayoutlab.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
